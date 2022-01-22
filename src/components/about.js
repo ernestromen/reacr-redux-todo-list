@@ -2,6 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import '@fortawesome/fontawesome-free/js/all.js';
 import { useState,useEffect,useRef } from 'react';
+const { v4: uuidv4 } = require('uuid');
 
 
 const About=(prop)=> {
@@ -12,23 +13,25 @@ const [status,setStatus] = useState([
 
 ]);
 
+const [formInput,setFormInput] = useState([]);
+
 const [tasks,setTasks] = useState([
-  {
-    id:0,
-    taskName:'eat a bunch of bananas1',
-taskStatus:{
-  completed:'true',
-  inProgress:'false'
-}
-},
-{
-  id:1,
-  taskName:'eat a bunch of bananas2',
-taskStatus:{
-  completed:'true',
-  inProgress:'false'
-}
-},
+//   {
+//     id:0,
+//     taskName:'eat a bunch of bananas1',
+// taskStatus:{
+//   completed:true,
+//   inProgress:false
+// }
+// },
+// {
+//   id:1,
+//   taskName:'eat a bunch of bananas2',
+// taskStatus:{
+//   completed:true,
+//   inProgress:false
+// }
+// },
 
 
 ]);
@@ -46,29 +49,38 @@ const handleTaskForm = (e) =>{
 
 
 const handleInput = (e) =>{
-setInputs([e.target.value])
-  
+e.preventDefault();
+
+
+
+
+let ob = {
+id:uuidv4(),
+taskName:formInput,
+taskStatus:{
+  completed:false,
+  inProgress:true
+}
+
+}
+
+
+setTasks(prev=>[...prev,...[ob]]);
 }
 
 const changeStatus = (e) =>{
   //id from node
   const target = e.target.id.split('id')[1];
   //One of the state objects
-const targetTask = tasks[target];
-console.log(tasks,'lets see');
+
 let mapped = tasks.map(el=>{
- return el.id=== target ? {...el,taskStatus:'in progress'}: {...el};
+;
+return el.id=== (target) ? {...el,taskStatus:{completed:!el.taskStatus.completed,inProgress:!el.taskStatus.progress}}: {...el};
   
   });
-console.log(mapped,'mapped');
-    // setTasks(prevState=> [...prevState,mapped]);
-/** */
-setTasks(prevState=>{
-  
- return [...prevState,{id:1,taskStatus:'in progress'}]
 
-});
-console.log(tasks,'after everything');
+    setTasks(mapped);
+
 
 
 
@@ -84,7 +96,7 @@ useEffect(() => {
 const list = tasks.map((e,i)=>{
   return <tr  key={i}>
       <th   scope="row">{tasks[i].taskName}</th>
-    <td id={`id${i}`} onClick={changeStatus} >{tasks[i].taskStatus.completed ? 'completed' : 'inProgress'}</td>
+    <td id={`id${tasks[i].id}`} onClick={changeStatus} >{tasks[i].taskStatus.completed ? 'completed' : 'inProgress'}</td>
     <td><i className="fas fa-edit"></i></td>
       <td><i className="fas fa-trash"></i></td>
        </tr>
@@ -99,14 +111,13 @@ const list = tasks.map((e,i)=>{
 
     return (
         <div>
-          {/* <div>{console.log(tasks,'tasks here')}</div> */}
         <div>this is the about page:{counter}</div>
         <div className="container ">
             <div className="row">
                 <div className="col-12">
-        <form className="mb-5 d-flex justify-content-center">
-        <input onChange={handleInput} type="text" placeholder="Enter task" className="w-auto form-control"/>
-        <button type="submit" onClick={handleTaskForm} className="btn btn-warning rounded-0">SUBMIT</button>
+        <form onSubmit={handleInput} className="mb-5 d-flex justify-content-center">
+        <input onChange={e=>setFormInput(e.target.value)} type="text" placeholder="Enter task" className="w-auto form-control"/>
+        <button  type="submit" className="btn btn-warning rounded-0">SUBMIT</button>
 
 </form>
 </div>
@@ -120,6 +131,7 @@ const list = tasks.map((e,i)=>{
       <th scope="col">delete</th>
     </tr>
   </thead>
+  
 <tbody>
 {
  list 
