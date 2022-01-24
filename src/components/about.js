@@ -175,7 +175,7 @@ const list = tasks.map((e,i)=>{
 
 </table>
 {showForm ? <EditForm/>:''}
-
+{console.log(                                                                                                                                                                       )}
 </div>
 
 

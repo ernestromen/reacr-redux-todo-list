@@ -1,46 +1,40 @@
-import React from 'react'
+import React from 'react';
+import {useState} from 'react';
 
-const EditForm = () => {
+
+
+
+
+
+const EditForm = (prop) => {
+  const [input, setInput] = useState("");
+
+
+  const handleForm = (e) =>{
+    e.preventDefault();
+  console.log(input);
+
+
+  console.log(prop.tasks,'tasks');
+  
+  }
+
     return (
-        <div >
-        <form  className="Form">
+        <div className='border border-dark' style={{width:"30%",margin:"auto",textAlign:"center"}} >
+        <form onSubmit={handleForm} className="Form">
         <input type="hidden"/>
         
           <label>
-            Title:<br/>
-            <input
+          taskName:<br/>
+            <input onChange={e=>setInput(e.target.value)}
              type="text"
-              name="Title"
+              name="taskName"
               /><br/>
           </label>
-         <br/>
-          <label>
-          Price:<br/>
-            <input
-             type="number"
-              name="Price"
-              /><br/>
-          </label>
-          <br/>
-          <br/>
-          <label>
-          Description:<br/>
-            <textarea 
-             type="text"
-              name="Description"
-              /><br/>
         
-          </label>
           <br/>
-          <label>
-          imageUrl:<br/>
-            <input
-             type="text"
-              name="imageUrl"
-              /><br/>
-          </label>
-          <input type="submit" value="Submit" /><br/>
-          <button type="button" className="Cancel">Cancel</button>
+          <input   style={{width:"49%",marginTop:"5px"}} type="submit" value="Submit" /><br/>
+          <button style={{width:"49%",marginTop:"5px",marginBottom:"5px"}} onClick={prop .hideForm} type="button" className="Cancel">Cancel</button>
         </form>
         </div>
     )
