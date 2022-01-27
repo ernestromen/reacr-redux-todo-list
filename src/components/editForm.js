@@ -10,19 +10,33 @@ const EditForm = (prop) => {
   const [input, setInput] = useState("");
 
 
+const cancelForm = ()=>{
+prop.setShowForm(false);
+}
+
   const handleForm = (e) =>{
     e.preventDefault();
   console.log(input);
+  console.log(prop.formId,'prop');
+  let mapped = prop.tasks.map(e=>{
+    console.log(e.id,'id');
+if(e.id === parseInt(prop.formId)){
+return {...e,...{taskName:input}}
+}else{
+  return e;
+};
+  });
+prop.setTasks(mapped);
 
-
-  console.log(prop.tasks,'tasks');
   
   }
 
+let condition =prop.tasks.length > 0 ? 'border border-dark':'';
+
     return (
-        <div className='border border-dark' style={{width:"30%",margin:"auto",textAlign:"center"}} >
+        <div className={condition} style={{width:"30%",margin:"auto",textAlign:"center"}} >
         <form onSubmit={handleForm} className="Form">
-        <input type="hidden"/>
+        <input type="hidden" data-id=""/>
         
           <label>
           taskName:<br/>
@@ -34,7 +48,7 @@ const EditForm = (prop) => {
         
           <br/>
           <input   style={{width:"49%",marginTop:"5px"}} type="submit" value="Submit" /><br/>
-          <button style={{width:"49%",marginTop:"5px",marginBottom:"5px"}} onClick={prop .hideForm} type="button" className="Cancel">Cancel</button>
+          <button onClick={cancelForm} style={{width:"49%",marginTop:"5px",marginBottom:"5px"}}  type="button" className="Cancel">Cancel</button>
         </form>
         </div>
     )
