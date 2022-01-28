@@ -1,0 +1,57 @@
+.inputcss{
+
+width: 49%;
+margin-top: 5px;
+
+}
+
+@media screen and (max-width: 1560px) {
+    .inputcss{
+
+        width: 95% !important;
+    }
+
+}
+
+.inputButtonCss{
+
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 49%;
+}
+
+.Cancel{
+
+    width: 49% ;
+}
+@media screen and (max-width: 1560px) {
+    .Cancel{
+
+        width: 95% !important;
+    }
+
+}
+
+.outerDiv{
+width: 30%;
+margin:auto;
+text-align: center;
+
+}
+
+@media screen and (max-width: 768px) {
+    .outerDiv{
+
+    width: 60%;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+
+    .outerDiv{
+
+        width: 100%;
+        }
+}

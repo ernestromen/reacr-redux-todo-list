@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 
-
+import './editForm.css';
 
 
 
@@ -32,7 +32,7 @@ prop.setTasks(mapped);
 let condition =prop.tasks.length > 0 ? 'border border-dark':'';
 
     return (
-        <div className={condition} style={{width:"30%",margin:"auto",textAlign:"center"}} >
+        <div className={condition + ' outerDiv'} >
         <form onSubmit={handleForm} className="Form">
         <input type="hidden" data-id=""/>
         
@@ -41,12 +41,13 @@ let condition =prop.tasks.length > 0 ? 'border border-dark':'';
             <input onChange={e=>setInput(e.target.value)}
              type="text"
               name="taskName"
+              style={{width:'95%'}}
               /><br/>
           </label>
         
           <br/>
-          <input   style={{width:"49%",marginTop:"5px"}} type="submit" value="Submit" /><br/>
-          <button onClick={cancelForm} style={{width:"49%",marginTop:"5px",marginBottom:"5px"}}  type="button" className="Cancel">Cancel</button>
+          <input className='inputcss'   type="submit" value="Submit" /><br/>
+          <button  onClick={cancelForm}   type="button" className="Cancel">Cancel</button>
         </form>
         </div>
     )
