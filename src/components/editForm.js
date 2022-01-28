@@ -15,19 +15,17 @@ prop.setShowForm(false);
 }
 
   const handleForm = (e) =>{
+    
     e.preventDefault();
-  console.log(input);
-  console.log(prop.formId,'prop');
-  let mapped = prop.tasks.map(e=>{
-    console.log(e.id,'id');
-if(e.id === parseInt(prop.formId)){
-return {...e,...{taskName:input}}
-}else{
-  return e;
-};
-  });
-prop.setTasks(mapped);
+let mapped = prop.tasks.map(e=>{
 
+  if(e.id.toString() === prop.formId){
+    return {...e,taskName:input};
+  }else{
+    return e;
+  }
+})
+prop.setTasks(mapped);
   
   }
 
